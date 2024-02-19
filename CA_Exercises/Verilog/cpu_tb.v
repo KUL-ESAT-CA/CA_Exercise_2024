@@ -311,19 +311,21 @@ begin
    wait (dut.instruction[6:0]==7'b1111110 || counter > `SIM_TIMEOUT);
    counter_result = counter;
 
-   case(dut.instruction[31:28])
-      4'h0: test_basic();
-      4'h1: test_mult_1();
-      4'h2: test_mult_2();
-      4'h3: test_mult_3();
-      4'h4: test_mult_4();
-      default: $display("### undefined test ###");
-   endcase
-
-   $display("%d cycles", counter_result);
    if(counter_result > `SIM_TIMEOUT)begin
       $display("*** SIMULATION TIMED OUT ***");
    end
+   else begin
+      case(dut.instruction[31:28])
+         4'h0: test_basic();
+         4'h1: test_mult_1();
+         4'h2: test_mult_2();
+         4'h3: test_mult_3();
+         4'h4: test_mult_4();
+         default: $display("### undefined test ###");
+      endcase
+   end
+
+   $display("%d cycles", counter_result);
    $finish;
 end
 endtask

@@ -107,7 +107,7 @@ for (src_case, test_mem_case) in SIM_CASE.items():
         if not _common_module_integrity:
             scoreboard.append(False)
             continue
-        elif 'Debug info' in lines:
+        elif 'Debug info' in lines or 'TIMED OUT' in lines:
             for line in lines.splitlines():
                 print(f'\t{line}')
             print(f'\033[1;31mSimulation result is incorrect\033[0m. Please check your design.')
